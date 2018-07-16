@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using CustomerExtensionLibrary;
 using NUnit.Framework;
 
 namespace CustomerLibrary.Tests
@@ -38,6 +39,22 @@ namespace CustomerLibrary.Tests
         public void Customer_ToString_ThrowFormatException(string format)
         {
             Assert.Throws<FormatException>(() => customer.ToString(format, CultureInfo.InvariantCulture));
+        }
+
+        [TestCase("F", ExpectedResult = "Customer record: Jeffrey")]
+        [TestCase("LRP", ExpectedResult = "Customer record: Richter, 1,000,000.00, +1 (425) 555-0100")]
+        public string Customer_Format_Test(string format)
+        {
+            CustomerFormatProvider fp = new CustomerFormatProvider();
+            return fp.Format(format, customer, CultureInfo.InvariantCulture);
+        }
+
+        [TestCase(null)]
+        [TestCase(23)]
+        public void Customer_Format_ThrowFormatException(object arg)
+        {
+            CustomerFormatProvider fp = new CustomerFormatProvider();
+            Assert.Throws<FormatException>(() => fp.Format("LRP", arg, CultureInfo.InvariantCulture));
         }
     }
 }

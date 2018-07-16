@@ -137,6 +137,9 @@ namespace CustomerLibrary
 
         /// <summary>
         /// Converts this instance to it's <see cref="string"/> representation with specific format provider.
+        /// 'N' for <see cref="Customer"/>'s full name;
+        /// 'P' for <see cref="Customer"/>'s contact phone;
+        /// 'R' for <see cref="Customer"/>'s revenue value.
         /// </summary>
         /// <param name="format">Format specifier.</param>
         /// <param name="formatProvider">Format provider.</param>
